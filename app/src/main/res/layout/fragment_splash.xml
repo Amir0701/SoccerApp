@@ -5,10 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.SplashFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:src="@drawable/ball"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:text="@string/welcome_to_soccer_app"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>
