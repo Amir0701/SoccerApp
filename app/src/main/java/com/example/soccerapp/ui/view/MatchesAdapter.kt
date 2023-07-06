@@ -36,6 +36,8 @@ class MatchesAdapter: RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
         val awayTeamLogo: ImageView = itemView.findViewById(R.id.awayTeamLogo)
         val matchDate: TextView = itemView.findViewById(R.id.matchDate)
         val matchTime: TextView = itemView.findViewById(R.id.matchTime)
+        val homeScore: TextView = itemView.findViewById(R.id.homeScore)
+        val awayScore: TextView = itemView.findViewById(R.id.awayScore)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -69,5 +71,7 @@ class MatchesAdapter: RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
 
         holder.matchTime.text = currentData.time?.time?.substring(0, 5)
         holder.matchDate.text = currentData.time?.date
+        holder.homeScore.text = currentData.scores?.homeScore
+        holder.awayScore.text = currentData.scores?.awayScore
     }
 }

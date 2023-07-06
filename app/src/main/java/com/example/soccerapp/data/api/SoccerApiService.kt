@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface SoccerApiService {
-    @GET("v2.2/fixtures/?t=schedule&d=2023-08-12")
+    @GET("v2.2/fixtures/?t=schedule&d=2023-04-21")
     suspend fun getMatches(
         @Query("user") user: String,
         @Query("token") token: String,

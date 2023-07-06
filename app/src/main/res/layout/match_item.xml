@@ -19,11 +19,12 @@
             android:id="@+id/leagueImage"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/ball"
-            android:layout_marginStart="60dp"
-            android:scaleType="centerCrop"
+            android:layout_marginStart="100dp"
             android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ball"
             app:layout_constraintEnd_toStartOf="@id/leagueTitle"
+            app:layout_constraintHorizontal_bias="0.47"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,11 +32,11 @@
             android:id="@+id/leagueTitle"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:textSize="16sp"
-            android:gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Sdfsfdsdfsss"
+            android:gravity="center"
             android:layout_marginStart="10dp"
+            android:text="Sdfsfdsdfsss"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/leagueImage"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +63,18 @@
             app:layout_constraintStart_toEndOf="@id/homeTeamLogo"
             app:layout_constraintTop_toBottomOf="@id/leagueImage" />
 
+        <TextView
+            android:id="@+id/homeScore"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.69"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/leagueImage" />
+
         <ImageView
             android:id="@+id/awayTeamLogo"
             android:layout_width="50dp"
@@ -84,6 +97,18 @@
             android:text="Chelsea"
             app:layout_constraintStart_toEndOf="@id/awayTeamLogo"
             app:layout_constraintTop_toBottomOf="@id/homeTeamLogo"/>
+
+        <TextView
+            android:id="@+id/awayScore"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.69"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/homeTeamLogo" />
 
         <TextView
             android:id="@+id/matchDate"

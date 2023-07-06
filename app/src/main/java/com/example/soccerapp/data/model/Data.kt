@@ -28,5 +28,6 @@ data class Data(
     @SerializedName("attendance"     ) var attendance    : String?     = null,
     @SerializedName("teams"          ) var teams         : Teams?,
     @SerializedName("league"         ) var league        : League?,
-    @SerializedName("time") var time: Time?
+    @SerializedName("time") var time: Time?,
+    @SerializedName("scores") var scores: Scores? = null
 )
