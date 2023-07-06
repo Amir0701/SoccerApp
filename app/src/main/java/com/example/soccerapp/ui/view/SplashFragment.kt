@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedDispatcher
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.soccerapp.R
@@ -57,7 +58,8 @@ class SplashFragment : Fragment() {
 //                if(it.dataList.isNotEmpty())
 //                    Log.i("data id", it.dataList[0].id.toString())
             }
-            findNavController().navigate(R.id.action_splashFragment_to_matchesFragment)
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.matchesFragment)
         })
     }
 
