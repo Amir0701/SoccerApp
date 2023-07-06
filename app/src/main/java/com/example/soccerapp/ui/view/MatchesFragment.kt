@@ -1,8 +1,8 @@
 package com.example.soccerapp.ui.view
 
 import android.app.DatePickerDialog
+import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.soccerapp.R
@@ -37,8 +38,8 @@ class MatchesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val but: Button = view.findViewById(R.id.toSiteButton)
-        but.setOnClickListener {
+        val toSiteButton: Button = view.findViewById(R.id.toSiteButton)
+        toSiteButton.setOnClickListener {
             findNavController().navigate(R.id.action_matchesFragment_to_webViewFragment)
         }
 
@@ -54,7 +55,11 @@ class MatchesFragment : Fragment() {
     private fun initRecyclerView(){
         adapter = MatchesAdapter()
         matchesRecyclerView.adapter = adapter
-        matchesRecyclerView.layoutManager = LinearLayoutManager(context)
+        when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> matchesRecyclerView.layoutManager = LinearLayoutManager(context)
+            Configuration.ORIENTATION_LANDSCAPE -> matchesRecyclerView.layoutManager = GridLayoutManager(context, 2)
+            else -> ""
+        }
         matchesRecyclerView.addItemDecoration(MatchesDecorator())
         adapter.differList.submitList(mainActivityViewModel.matchesLiveData.value?.dataList)
     }

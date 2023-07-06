@@ -34,16 +34,9 @@ class SplashFragment : Fragment() {
         val formattedDate = targetFormat.parse(dateString)
         formattedDate?.let { mainActivityViewModel.getMatchesByDate(it) }
     }
-    override fun onResume() {
-        super.onResume()
-    }
 
     private fun observe(){
         mainActivityViewModel.matchesLiveData.observe(viewLifecycleOwner, Observer {soccer->
-            soccer?.let {
-//                if(it.dataList.isNotEmpty())
-//                    Log.i("data id", it.dataList[0].id.toString())
-            }
             findNavController().popBackStack()
             findNavController().navigate(R.id.matchesFragment)
         })
