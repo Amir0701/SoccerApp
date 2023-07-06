@@ -30,10 +30,10 @@ class WebViewFragment : Fragment() {
         OneSignal.setAppId(Util.ONESIGNAL_APP_ID)
 
         web = view.findViewById(R.id.webView)
+        web.loadUrl("https://en.wikipedia.org/wiki/Main_Page")
     }
 
     override fun onStart() {
         super.onStart()
-        web.loadUrl("https://en.wikipedia.org/wiki/Main_Page")
     }
 }

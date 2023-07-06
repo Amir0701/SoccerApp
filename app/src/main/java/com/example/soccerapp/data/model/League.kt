@@ -10,5 +10,4 @@ data class League(
     @SerializedName("country_name") var countryName: String? = null,
     @SerializedName("country_code") var countryCode: String? = null,
     @SerializedName("country_flag") var countryFlag: String? = null
-
 )

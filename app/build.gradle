@@ -65,12 +65,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
-    implementation 'com.google.dagger:dagger-android:2.35.1'
-    kapt "com.google.dagger:dagger-compiler:2.35.1"
-
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
-
 
     implementation 'com.onesignal:OneSignal:4.8.6'
 }
