@@ -18,7 +18,11 @@
         android:id="@+id/matchesFragment"
         android:name="com.example.soccerapp.ui.view.MatchesFragment"
         android:label="fragment_matches"
-        tools:layout="@layout/fragment_matches" />
+        tools:layout="@layout/fragment_matches" >
+        <action
+            android:id="@+id/action_matchesFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.example.soccerapp.ui.view.WebViewFragment"
