@@ -46,9 +46,9 @@ class MatchesFragment : Fragment() {
         observeMatches()
         matchesRecyclerView = view.findViewById(R.id.matchesRecyclerView)
         calendarImageView = view.findViewById(R.id.calendarImage)
-        //mainActivityViewModel.getMatchesByDate()
         initRecyclerView()
         calendar = Calendar.getInstance()
+        setDateOnClickListener()
     }
 
     private fun initRecyclerView(){
@@ -63,7 +63,7 @@ class MatchesFragment : Fragment() {
         mainActivityViewModel.matchesLiveData.observe(viewLifecycleOwner, Observer {soccerMetaData->
             soccerMetaData?.let {
                 if(it.dataList.isNotEmpty()){
-                    Log.i("id data", it.dataList[0].id.toString())
+                    adapter.differList.submitList(it.dataList)
                 }
             }
         })
@@ -74,8 +74,10 @@ class MatchesFragment : Fragment() {
             calendar.set(Calendar.YEAR, i)
             calendar.set(Calendar.MONTH, i2)
             calendar.set(Calendar.DAY_OF_MONTH, i3)
-            val formattedDate = reformat(calendar.time)
-            mainActivityViewModel.getMatchesByDate(calendar.time)
+            val dateString = reformat(calendar.time)
+            val targetFormat = SimpleDateFormat("yyyy-MM-dd")
+            val formattedDate = targetFormat.parse(dateString)
+            mainActivityViewModel.getMatchesByDate(formattedDate)
         }
 
         calendarImageView.setOnClickListener {
