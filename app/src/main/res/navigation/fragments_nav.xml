@@ -25,10 +25,18 @@
         <action
             android:id="@+id/action_matchesFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_matchesFragment_to_leaguesFragment"
+            app:destination="@id/leaguesFragment" />
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.example.soccerapp.ui.view.WebViewFragment"
         android:label="fragment_web_view"
         tools:layout="@layout/fragment_web_view" />
+    <fragment
+        android:id="@+id/leaguesFragment"
+        android:name="com.example.soccerapp.ui.view.LeaguesFragment"
+        android:label="fragment_leagues"
+        tools:layout="@layout/fragment_leagues" />
 </navigation>

@@ -50,6 +50,11 @@ class MatchesFragment : Fragment() {
         initRecyclerView()
         calendar = Calendar.getInstance()
         setDateOnClickListener()
+
+        val toLeagueButton: Button = view.findViewById(R.id.tournamentButton)
+        toLeagueButton.setOnClickListener {
+            findNavController().navigate(R.id.action_matchesFragment_to_leaguesFragment)
+        }
     }
 
     private fun initRecyclerView(){

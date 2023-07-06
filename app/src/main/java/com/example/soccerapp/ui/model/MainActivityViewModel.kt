@@ -5,16 +5,13 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.soccerapp.data.api.GsonInstance
-import com.example.soccerapp.data.model.Leg
+import com.example.soccerapp.data.model.LeaguesData
 import com.example.soccerapp.data.model.SoccerMetaData
 import com.example.soccerapp.data.repository.SoccerRepository
 import com.example.soccerapp.util.Util
-import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -24,7 +21,7 @@ import java.util.Date
 class MainActivityViewModel(val app: Application,
                             val soccerRepository: SoccerRepository): ViewModel() {
     val matchesLiveData = MutableLiveData<SoccerMetaData>()
-
+    val leaguesLiveDate = MutableLiveData<LeaguesData>()
     fun getMatchesByDate(date: Date) = viewModelScope.launch(Dispatchers.IO){
         delay(500)
         if(hasInternetConnection()){
@@ -47,11 +44,19 @@ class MainActivityViewModel(val app: Application,
 
     fun getAllLeagues() = viewModelScope.launch{
         val response = soccerRepository.getAllLeagues(Util.USER, Util.Token)
-        if (response.isSuccessful){
-            Log.i("all_good", response.code().toString())
+        val leaguesData = getLeaguesResponse(response)
+        leaguesLiveDate.postValue(leaguesData)
+    }
+
+    private fun getLeaguesResponse(response: Response<LeaguesData>): LeaguesData{
+        var result = LeaguesData(arrayListOf())
+        if(response.isSuccessful){
             response.body()?.let {
+                result = it
             }
         }
+
+        return result
     }
     private fun hasInternetConnection(): Boolean{
         val connectivityManager = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
