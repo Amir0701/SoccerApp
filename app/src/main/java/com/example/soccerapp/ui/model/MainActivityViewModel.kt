@@ -19,16 +19,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.util.Date
 
 class MainActivityViewModel(val app: Application,
                             val soccerRepository: SoccerRepository): ViewModel() {
     val matchesLiveData = MutableLiveData<SoccerMetaData>()
 
-    fun getMatchesByDate() = viewModelScope.launch(Dispatchers.IO){
+    fun getMatchesByDate(date: Date) = viewModelScope.launch(Dispatchers.IO){
         delay(1000)
         if(hasInternetConnection()){
             Log.i("get match","response body")
-            val response = soccerRepository.getMatches(Util.USER, Util.Token)
+            val response = soccerRepository.getMatches(Util.USER, Util.Token, date)
             Log.i("response succ",response.code().toString())
             val soccerMetaData = getMatchesByDateResponse(response)
             matchesLiveData.postValue(soccerMetaData)

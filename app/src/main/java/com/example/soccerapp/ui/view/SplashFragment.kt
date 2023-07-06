@@ -13,6 +13,12 @@ import com.example.soccerapp.ui.model.MainActivityViewModel
 import com.example.soccerapp.util.Util
 
 import kotlinx.coroutines.delay
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class SplashFragment : Fragment() {
     lateinit var mainActivityViewModel: MainActivityViewModel
@@ -32,17 +38,34 @@ class SplashFragment : Fragment() {
         super.onStart()
         mainActivityViewModel = (activity as MainActivity).mainActivityViewModel
         observe()
-        mainActivityViewModel.getMatchesByDate()
-        mainActivityViewModel.getAllLeagues()
+        val calendar = Calendar.getInstance()
+        reformat(calendar.time)
+//        println(calendar.time)
+//        val formatter = DateTimeFormatter.ofPattern("d MMMM, yyyy")
+//        val date = LocalDate.parse(calendar.time.toString(), formatter)
+        //Log.i("date curr", date.toString())
+        //mainActivityViewModel.getAllLeagues()
+        mainActivityViewModel.getMatchesByDate(calendar.time)
     }
     override fun onResume() {
         super.onResume()
     }
 
     private fun observe(){
-        mainActivityViewModel.matchesLiveData.observe(viewLifecycleOwner, Observer {
-            Log.i("data id", it!!.dataList[0].id.toString())
+        mainActivityViewModel.matchesLiveData.observe(viewLifecycleOwner, Observer {soccer->
+            soccer?.let {
+//                if(it.dataList.isNotEmpty())
+//                    Log.i("data id", it.dataList[0].id.toString())
+            }
             findNavController().navigate(R.id.action_splashFragment_to_matchesFragment)
         })
+    }
+
+    private fun reformat(date: Date): String{
+        val format = "yyyy-MM-dd"
+        val simpleDateFormat = SimpleDateFormat(format, Locale.ENGLISH)
+        val dat = simpleDateFormat.applyPattern(simpleDateFormat.format(date))
+        //Log.i("date_curr", dat.)
+        return simpleDateFormat.format(date)
     }
 }
