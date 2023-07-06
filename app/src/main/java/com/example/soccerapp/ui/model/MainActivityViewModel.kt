@@ -26,11 +26,9 @@ class MainActivityViewModel(val app: Application,
     val matchesLiveData = MutableLiveData<SoccerMetaData>()
 
     fun getMatchesByDate(date: Date) = viewModelScope.launch(Dispatchers.IO){
-        delay(1000)
+        delay(500)
         if(hasInternetConnection()){
-            Log.i("get match","response body")
             val response = soccerRepository.getMatches(Util.USER, Util.Token, date)
-            Log.i("response succ",response.code().toString())
             val soccerMetaData = getMatchesByDateResponse(response)
             matchesLiveData.postValue(soccerMetaData)
         }
@@ -38,11 +36,8 @@ class MainActivityViewModel(val app: Application,
 
     private fun getMatchesByDateResponse(response: Response<SoccerMetaData>): SoccerMetaData{
         var result = SoccerMetaData(arrayListOf())
-        Log.i("body","response body")
         if(response.isSuccessful){
-            Log.i("body","response body")
             response.body()?.let {
-                Log.i("body","response body")
                 result = it
             }
         }
@@ -55,14 +50,8 @@ class MainActivityViewModel(val app: Application,
         if (response.isSuccessful){
             Log.i("all_good", response.code().toString())
             response.body()?.let {
-                //val data = GsonInstance.instance.fromJson(it, Leg::class.java)
-                Log.i("all_good", it.data[0].id.toString())
             }
         }
-//        val gson = GsonBuilder().create()
-//        val data = gson.fromJson(response, Leg::class.java)
-//        //val dat = GsonInstance.instance.fromJson(response, Leg::class.java)
-//        Log.i("all_good", data.id.toString())
     }
     private fun hasInternetConnection(): Boolean{
         val connectivityManager = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
