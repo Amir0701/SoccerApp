@@ -1,22 +1,15 @@
 package com.example.soccerapp.ui.view
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedDispatcher
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.soccerapp.R
 import com.example.soccerapp.ui.model.MainActivityViewModel
-import com.example.soccerapp.util.Util
-
-import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -31,22 +24,15 @@ class SplashFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onStart() {
         super.onStart()
         mainActivityViewModel = (activity as MainActivity).mainActivityViewModel
         observe()
         val calendar = Calendar.getInstance()
-        reformat(calendar.time)
-//        println(calendar.time)
-//        val formatter = DateTimeFormatter.ofPattern("d MMMM, yyyy")
-//        val date = LocalDate.parse(calendar.time.toString(), formatter)
-        //Log.i("date curr", date.toString())
-        //mainActivityViewModel.getAllLeagues()
-        mainActivityViewModel.getMatchesByDate(calendar.time)
+        val dateString = reformat(calendar.time)
+        val targetFormat = SimpleDateFormat("yyyy-MM-dd")
+        val formattedDate = targetFormat.parse(dateString)
+        formattedDate?.let { mainActivityViewModel.getMatchesByDate(it) }
     }
     override fun onResume() {
         super.onResume()
@@ -66,8 +52,6 @@ class SplashFragment : Fragment() {
     private fun reformat(date: Date): String{
         val format = "yyyy-MM-dd"
         val simpleDateFormat = SimpleDateFormat(format, Locale.ENGLISH)
-        val dat = simpleDateFormat.applyPattern(simpleDateFormat.format(date))
-        //Log.i("date_curr", dat.)
         return simpleDateFormat.format(date)
     }
 }

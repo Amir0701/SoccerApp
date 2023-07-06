@@ -8,10 +8,11 @@ import retrofit2.http.Query
 import java.util.Date
 
 interface SoccerApiService {
-    @GET("v2.2/fixtures/?t=schedule&d=2023-08-12")
+    @GET("v2.2/fixtures/?t=schedule")
     suspend fun getMatches(
         @Query("user") user: String,
         @Query("token") token: String,
+        @Query("d") date: Date
     ): Response<SoccerMetaData>
 
     @GET("v2.2/leagues/?t=list")
