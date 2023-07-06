@@ -9,11 +9,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.soccerapp.R
 import com.example.soccerapp.ui.model.MainActivityViewModel
 
 class MatchesFragment : Fragment() {
     lateinit var mainActivityViewModel: MainActivityViewModel
+    private lateinit var matchesRecyclerView: RecyclerView
+    private lateinit var adapter: MatchesAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +35,16 @@ class MatchesFragment : Fragment() {
 
         mainActivityViewModel = (activity as MainActivity).mainActivityViewModel
         observeMatches()
-        mainActivityViewModel.getMatchesByDate()
+        matchesRecyclerView = view.findViewById(R.id.matchesRecyclerView)
+        //mainActivityViewModel.getMatchesByDate()
+        initRecyclerView()
+    }
+
+    private fun initRecyclerView(){
+        adapter = MatchesAdapter()
+        matchesRecyclerView.adapter = adapter
+        matchesRecyclerView.layoutManager = LinearLayoutManager(context)
+        adapter.differList.submitList(mainActivityViewModel.matchesLiveData.value?.dataList)
     }
 
     private fun observeMatches(){

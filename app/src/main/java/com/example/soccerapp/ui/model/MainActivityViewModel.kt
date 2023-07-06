@@ -9,10 +9,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.soccerapp.data.api.GsonInstance
+import com.example.soccerapp.data.model.Leg
 import com.example.soccerapp.data.model.SoccerMetaData
 import com.example.soccerapp.data.repository.SoccerRepository
 import com.example.soccerapp.util.Util
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -21,10 +25,11 @@ class MainActivityViewModel(val app: Application,
     val matchesLiveData = MutableLiveData<SoccerMetaData>()
 
     fun getMatchesByDate() = viewModelScope.launch(Dispatchers.IO){
+        delay(1000)
         if(hasInternetConnection()){
             Log.i("get match","response body")
             val response = soccerRepository.getMatches(Util.USER, Util.Token)
-            Log.i("response succ",response.isSuccessful.toString())
+            Log.i("response succ",response.code().toString())
             val soccerMetaData = getMatchesByDateResponse(response)
             matchesLiveData.postValue(soccerMetaData)
         }
@@ -44,6 +49,20 @@ class MainActivityViewModel(val app: Application,
         return result
     }
 
+    fun getAllLeagues() = viewModelScope.launch{
+        val response = soccerRepository.getAllLeagues(Util.USER, Util.Token)
+        if (response.isSuccessful){
+            Log.i("all_good", response.code().toString())
+            response.body()?.let {
+                //val data = GsonInstance.instance.fromJson(it, Leg::class.java)
+                Log.i("all_good", it.data[0].id.toString())
+            }
+        }
+//        val gson = GsonBuilder().create()
+//        val data = gson.fromJson(response, Leg::class.java)
+//        //val dat = GsonInstance.instance.fromJson(response, Leg::class.java)
+//        Log.i("all_good", data.id.toString())
+    }
     private fun hasInternetConnection(): Boolean{
         val connectivityManager = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connectivityManager.activeNetwork ?: return false

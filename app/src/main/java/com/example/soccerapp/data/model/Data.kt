@@ -4,8 +4,8 @@ import com.example.soccerapp.data.model.Teams
 import com.google.gson.annotations.SerializedName
 
 data class Data(
-    @SerializedName("id"             ) var id            : Int?        = null,
-    @SerializedName("status"         ) var status        : Int?        = null,
+    @SerializedName("id"             ) var id            : String?        = null,
+    @SerializedName("status"         ) var status        : String?        = null,
     @SerializedName("status_name"    ) var statusName    : String?     = null,
     @SerializedName("status_period"  ) var statusPeriod  : String?     = null,
     @SerializedName("pitch"          ) var pitch         : String?     = null,

@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/leagueImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/ball"
             android:layout_marginStart="60dp"
             android:scaleType="centerCrop"
@@ -30,7 +30,7 @@
         <TextView
             android:id="@+id/leagueTitle"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="25dp"
             android:textSize="16sp"
             android:gravity="center"
             android:layout_marginTop="10dp"
@@ -81,7 +81,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:textSize="16sp"
-            android:text="Chealsea"
+            android:text="Chelsea"
             app:layout_constraintStart_toEndOf="@id/awayTeamLogo"
             app:layout_constraintTop_toBottomOf="@id/homeTeamLogo"/>
 
@@ -112,6 +112,16 @@
             app:layout_constraintHorizontal_bias="0.93"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/matchDate" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/browser_actions_bg_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/matchDate"
+            app:layout_constraintTop_toBottomOf="@id/leagueImage"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

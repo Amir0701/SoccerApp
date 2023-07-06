@@ -66,5 +66,8 @@ class MatchesAdapter: RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
                 .load(teams.away?.img)
                 .into(holder.awayTeamLogo)
         }
+
+        holder.matchTime.text = currentData.time?.time?.substring(0, 5)
+        holder.matchDate.text = currentData.time?.date
     }
 }
